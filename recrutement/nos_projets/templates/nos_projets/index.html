@@ -1,7 +1,65 @@
 {% extends 'home/base.html' %}
-
+{% load static %}
 {% block content %}
 <div class="container">
     <h1>Nos projets</h1>
+    <a href="{% url 'post_new' %}" class="btn btn-primary">New post</a>
+    {% if posts %}
+        <h2>Derniers posts</h2>
+        <div class="row">
+            {%for post in posts%}
+                <div class="col-4">
+                    <div class="card">
+                        <img src="media/{{post.img}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{% url 'post_view' id=post.id %}">{{post.title}}</a>
+                            </h5>
+                            <p class="card-text">{{post.text}}</p>
+                            <p class="card-text">
+                                {%for user in users%}
+                                    {% if user.id == post.author_id %}
+                                        {{user.username}}
+                                    {% endif %}
+                                {%endfor%}
+                            </p>
+                            {% if user.is_staff %}
+                                <a class="btn btn-danger" href="{% url 'archive_post' id=post.id %}">Archiver post</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {%endfor%}
+        </div>
+    {% endif %}
+    {% if user.is_staff %}
+        <h2>Drafts</h2>
+        <div class="row">
+            {%for post in drafts%}
+                <div class="col-4">
+                    <div class="card">
+                        <img src="media/{{post.img}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{% url 'post_view' id=post.id %}">{{post.title}}</a>
+                            </h5>
+                            <p class="card-text">{{post.text}}</p>
+                            <p class="card-text">
+                                {%for user in users%}
+                                    {% if user.id == post.author_id %}
+                                        {{user.username}}
+                                    {% endif %}
+                                {%endfor%}
+                            </p>
+                            <p class="float-end">
+                                <i>non publié</i>
+                            </p>
+                            <a class="btn btn-primary" href="{% url 'publish_post' id=post.id %}">Publier post</a>
+                        </div>
+                    </div>
+                </div>
+            {%endfor%}
+        </div>
+    {% endif %}
 </div>
 {% endblock %}
