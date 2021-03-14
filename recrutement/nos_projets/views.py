@@ -7,8 +7,19 @@ from .forms import PostForm
 from .models import Post
 
 def projets_view(request):
-    posts = Post.objects.all()
-    return render(request, 'nos_projets/index.html', {'posts': posts})
+    posts = Post.objects.filter(is_published = 'True').order_by('published_date')
+    drafts = Post.objects.filter(is_published = 'False').order_by('created_date')
+    users = User.objects.all()
+
+    return render(
+        request, 
+        'nos_projets/index.html', 
+        {
+            'posts': posts,
+            'drafts': drafts,
+            'users': users
+        }
+    )
 
 def post_view(request, id):
     post = get_object_or_404(Post, id = id)
