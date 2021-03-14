@@ -1,12 +1,14 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from django.conf import settings
+from django.conf.urls.static import static
 
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE)
     title = models.CharField(max_length = 255)
     text = models.TextField()
-    img = models.ImageField(upload_to = 'nos_projets/static/images')
+    img = models.ImageField(upload_to = 'images')
     created_date = models.DateTimeField(default = timezone.now)
     published_date = models.DateTimeField(blank = True, null = True)
     is_published = models.BooleanField(default = False)
