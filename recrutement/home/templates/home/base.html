@@ -30,9 +30,9 @@
 
     <nav id="navbar" class="navbar">
       <ul>
-        <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-        <li><a class="nav-link scrollto" href="#about">Candidature</a></li>
-        <li><a class="nav-link scrollto" href="#services">Nos Projets</a></li>
+        <li><a class="nav-link scrollto active" href="{% url 'index_view'%}">Home</a></li>
+        <li><a class="nav-link scrollto" href="{% url 'candidature' %}">Candidature</a></li>
+        <li><a class="nav-link scrollto" href="{% url 'projets_view'%}">Nos Projets</a></li>
         <li><a href="blog.html">Blog</a></li>
         <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
