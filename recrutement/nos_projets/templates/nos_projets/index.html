@@ -10,7 +10,7 @@
             {%for post in posts%}
                 <div class="col-4">
                     <div class="card">
-                        <img src="https://i.picsum.photos/id/271/200/200.jpg?hmac=ZEj4e_twCOPm3eoBeBMIKpcbFcD7s8TwRPMuyhLmqPk" class="card-img-top" alt="...">
+                        <img src="{{post.img}}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">
                                 <a href="{% url 'post_view' id=post.id %}">{{post.title}}</a>
@@ -38,7 +38,7 @@
             {%for post in drafts%}
                 <div class="col-4">
                     <div class="card">
-                        <img src="https://i.picsum.photos/id/271/200/200.jpg?hmac=ZEj4e_twCOPm3eoBeBMIKpcbFcD7s8TwRPMuyhLmqPk" class="card-img-top" alt="...">
+                        <img src="post.img" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">
                                 <a href="{% url 'post_view' id=post.id %}">{{post.title}}</a>

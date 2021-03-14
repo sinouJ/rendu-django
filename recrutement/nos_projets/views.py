@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
-from django.shortcuts import redirect, get_object_or_404
+from django.http import HttpResponseRedirect
 from django.utils import timezone
 
 from .forms import PostForm
@@ -30,14 +30,18 @@ def post_new(request):
     page_title = 'Créer un post'
 
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
 
         if form.is_valid():
             post = form.save(commit = False)
             post.author = request.user
             post.is_published = False
+            post.img = request.FILES['img']
             post.save()
-            return redirect('post_view', id=post.id)
+            return redirect('post_view', id = post.id)
+        
+        else:
+            return render(request, 'nos_projets/post_new.html', {'form': form, 'page_title': page_title})
 
     else:
         form = PostForm()
