@@ -65,16 +65,13 @@ def post_edit(request, id):
 def publish_post(request, id):
     post = get_object_or_404(Post, id = id)
 
-    post.is_published = True
-    post.published_date = timezone.now()
-    post.save()
+    post.publish()
 
-    return redirect('all_posts')
+    return redirect('projets_view')
 
 def archive_post(request, id):
     post = get_object_or_404(Post, id = id)
 
-    post.is_published = False
-    post.save()
+    post.draft()
 
-    return redirect('all_posts')
+    return redirect('projets_view')

@@ -15,6 +15,10 @@ class Post(models.Model):
         self.is_published = True
         self.save()
 
+    def draft(self):
+        self.is_published = False
+        self.save()
+
     def __str__(self):
         return self.title
 
