@@ -1,0 +1,18 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+    <section>
+        <div class="container">
+            <h1>Post CV</h1>
+            <div class="row">
+                <div class="contact">
+                    <form method="POST" enctype="multipart/form-data" class="php-email-form">
+                        {% csrf_token %}
+                        {{form}}
+                        <button enctype="multipart/form-data" type="submit">Envoyer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
