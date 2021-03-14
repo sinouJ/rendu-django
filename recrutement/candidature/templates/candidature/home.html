@@ -1,23 +1,36 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Candidature</title>
-</head>
-<body>
-    <header>
-        <h1>Envoyer une candidature</h1>
-    </header>
-    <section>
-        {% block content %}
-            <form method="POST">
-                {% csrf_token %}
-                {{form}}
-                <button enctype="multipart/form-data" type="submit">Envoyer</button>
-            </form>
-        {% endblock %}
-    </section>
-</body>
-</html>
+{%extends 'home/base.html'%}
+
+{% block content %}
+<section>
+    <div class="container">
+        <h1>Candidatures</h1>
+        <div class="row">
+            {% if user.is_authenticated %}
+            <div class="col-4">
+                <a href="{% url 'post_cv_view' %}" class="btn btn-primary">Poster un CV</a>
+            </div>
+            {% endif %}
+            {% if user.is_staff %}
+                {% for candidature in candidatures %}
+                    <div>
+                        <a href="{% url 'detail_candidature_view' id=candidature.id %}">
+                            {{candidature.title}}
+                        </a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                {% for candidature in candidatures %}
+                    {% if candidature.author_id == user.id %}
+                        <div>
+                            <a href="{% url 'detail_candidature_view' id=candidature.id %}">
+                                {{candidature.title}}
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            
+        </div>
+    </div>
+</section>
+{% endblock %}

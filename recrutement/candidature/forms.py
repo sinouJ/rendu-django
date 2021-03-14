@@ -1,10 +1,8 @@
-from django.forms import ModelForm
-from candidature.models import PostCV
+from django import forms
+from .models import PostCV
 
-class PostCVForm(ModelForm):
+class PostCVForm(forms.ModelForm):
+
     class Meta:
         model = PostCV
-        fields = ['upload']
-
-form = PostCVForm()
-
+        fields = ('title', 'description', 'fileCV')

@@ -1,0 +1,22 @@
+{%extends 'home/base.html'%}
+
+{% block content %}
+<section>
+    <div class="container">
+        <h1>Detail candidature</h1>
+        <div class="row">
+            <h2>{{candidature.title}}</h2>
+            <p>
+                {{candidature.description}}
+            </p>
+            <p>
+                {{candidature.author}}
+            </p>
+            <p>
+                {{candidature.published_date}}
+            </p>
+            <img src="media/{{candidature.fileCV}}">
+        </div>
+    </div>
+</section>
+{% endblock %}
