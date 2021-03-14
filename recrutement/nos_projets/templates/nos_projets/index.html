@@ -1,5 +1,5 @@
 {% extends 'home/base.html' %}
-
+{% load static %}
 {% block content %}
 <div class="container">
     <h1>Nos projets</h1>
@@ -10,7 +10,7 @@
             {%for post in posts%}
                 <div class="col-4">
                     <div class="card">
-                        <img src="{{post.img}}" class="card-img-top" alt="...">
+                        <img src="{% static '{{post.img}}' %}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">
                                 <a href="{% url 'post_view' id=post.id %}">{{post.title}}</a>
